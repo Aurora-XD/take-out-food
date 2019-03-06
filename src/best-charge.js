@@ -1,5 +1,5 @@
-let itemsModule = require('./items.js');
-let promotionsModule = require('./promotions.js');
+// const itemsModule = require('./items.js');
+// const promotionsModule = require('./promotions.js');
 
 /**
  * bestCharge方法,对应MVC模型中的Controller控制层
@@ -11,9 +11,8 @@ let promotionsModule = require('./promotions.js');
  * output: string
  */
 function bestCharge(selectedItems) {
-  let items = itemsModule.loadAllItems(); //载入所有菜品信息
-  let promotions = promotionsModule.loadPromotions();  //载入所有优惠信息
-
+  let items = loadAllItems(); //载入所有菜品信息
+  let promotions = loadPromotions();  //载入所有优惠信息
   let inputOfJsonModel = preProInput(selectedItems);  //预处理输入数据,生成KV形式的JSON对象
   let summary = calcSummary(inputOfJsonModel, items, promotions);  //计算Model
   return generateOrderDetails(summary); //渲染输出内容模版View
@@ -204,7 +203,3 @@ function generateOrderDetails(summary) {
   orderDetails += '===================================';
   return orderDetails;
 }
-
-module.exports = {
-  bestCharge: bestCharge
-};
